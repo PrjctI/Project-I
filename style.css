@@ -1,0 +1,816 @@
+/* ═══════════════════════════════════════════════
+   PROJECT I — STYLE
+   Color palette:
+     Background:  #0d0d0d (near-black)
+     Text:        #f0e6d3 (warm parchment), #ffffff
+     Accent:      #c9a84c (warm gold)
+     Secondary:   #6b2d3e (muted burgundy)
+   ═══════════════════════════════════════════════ */
+
+/* ── Reset ───────────────────────────────────── */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #f0e6d3;
+    background: #0d0d0d;
+    line-height: 1.7;
+    font-weight: 300;
+    overflow-x: hidden;
+}
+
+/* ── Typography ──────────────────────────────── */
+h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+a {
+    color: #c9a84c;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #e0c068;
+}
+
+strong {
+    font-weight: 500;
+    color: #ffffff;
+}
+
+/* ── Navbar ──────────────────────────────────── */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    transition: background-color 0.4s, padding 0.4s, box-shadow 0.4s;
+}
+
+.navbar.scrolled {
+    background: rgba(13, 13, 13, 0.95);
+    padding: 1rem 3rem;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #f0e6d3;
+    letter-spacing: 0.05em;
+}
+
+.nav-brand:hover {
+    color: #c9a84c;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+}
+
+.nav-links a {
+    color: #f0e6d3;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #c9a84c;
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-links a.active {
+    color: #c9a84c;
+}
+
+/* Hamburger toggle */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: #f0e6d3;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ── Parallax Sections ───────────────────────── */
+.parallax-section {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0d0d0d;
+    overflow: hidden;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 13, 13, 0.35);
+    z-index: 1;
+}
+
+/* ── Animated Philosopher Images ─────────────── */
+.philosopher-wrap {
+    position: absolute;
+    top: -10%;
+    width: 55%;
+    height: 120%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.philosopher-wrap.philosopher-center {
+    width: 80%;
+    left: 10%;
+}
+
+.philosopher-wrap.philosopher-right {
+    right: 0;
+}
+
+.philosopher-wrap.philosopher-left {
+    left: 0;
+}
+
+.philosopher-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center 20%;
+    background-repeat: no-repeat;
+    will-change: transform;
+}
+
+/* Gradient masks — philosophers fade into darkness */
+.philosopher-center .philosopher-img {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.7) 15%, rgba(0,0,0,0.7) 85%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.7) 15%, rgba(0,0,0,0.7) 85%, transparent 100%);
+}
+
+.philosopher-right .philosopher-img {
+    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.5) 50%, transparent 90%);
+    mask-image: linear-gradient(to left, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.5) 50%, transparent 90%);
+}
+
+.philosopher-left .philosopher-img {
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.5) 50%, transparent 90%);
+    mask-image: linear-gradient(to right, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.5) 50%, transparent 90%);
+}
+
+/* Ken Burns animations — slow cinematic drift */
+.section-hero .philosopher-img {
+    animation: kb-zoom 30s ease-in-out infinite alternate;
+}
+
+.section-about .philosopher-img {
+    animation: kb-drift-left 25s ease-in-out infinite alternate;
+}
+
+.section-youtube .philosopher-img {
+    animation: kb-drift-right 28s ease-in-out infinite alternate;
+}
+
+.section-papers .philosopher-img {
+    animation: kb-drift-up 22s ease-in-out infinite alternate;
+}
+
+.section-blog .philosopher-img {
+    animation: kb-drift-down 26s ease-in-out infinite alternate;
+}
+
+@keyframes kb-zoom {
+    0%   { transform: scale(1); }
+    100% { transform: scale(1.12); }
+}
+
+@keyframes kb-drift-left {
+    0%   { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.1) translate(-3%, 1%); }
+}
+
+@keyframes kb-drift-right {
+    0%   { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.1) translate(3%, -1%); }
+}
+
+@keyframes kb-drift-up {
+    0%   { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.1) translate(1%, -3%); }
+}
+
+@keyframes kb-drift-down {
+    0%   { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.1) translate(-1%, 3%); }
+}
+
+.section-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    width: 100%;
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+.section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.section-divider {
+    width: 60px;
+    height: 1px;
+    background: #c9a84c;
+    margin: 0 auto 2rem;
+}
+
+.section-subtitle {
+    font-size: 1.05rem;
+    color: rgba(240, 230, 211, 0.7);
+    margin-bottom: 3rem;
+    font-style: italic;
+}
+
+.philosopher-credit {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: rgba(240, 230, 211, 0.3);
+    z-index: 2;
+    letter-spacing: 0.03em;
+}
+
+/* ── Hero Section ────────────────────────────── */
+.hero-content {
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+}
+
+.hero-pre {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #c9a84c;
+    letter-spacing: 0.2em;
+    margin-bottom: 1.5rem;
+}
+
+.hero-title {
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 300;
+    color: #ffffff;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 40px rgba(0, 0, 0, 0.5);
+}
+
+.hero-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: rgba(240, 230, 211, 0.75);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #c9a84c;
+    animation: bounce 2.5s infinite;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+    color: #c9a84c;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+    40% { transform: translateX(-50%) translateY(-12px); }
+    60% { transform: translateX(-50%) translateY(-6px); }
+}
+
+/* ── About Section ───────────────────────────── */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    text-align: left;
+    margin-top: 1rem;
+}
+
+.about-text p {
+    margin-bottom: 1.2rem;
+    font-size: 1.02rem;
+    color: rgba(240, 230, 211, 0.85);
+}
+
+.about-pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.pillar {
+    padding-left: 1.5rem;
+    border-left: 2px solid rgba(201, 168, 76, 0.3);
+}
+
+.pillar-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #c9a84c;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.pillar h4 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.03em;
+}
+
+.pillar p {
+    font-size: 0.9rem;
+    color: rgba(240, 230, 211, 0.6);
+}
+
+/* ── YouTube Section ─────────────────────────── */
+.youtube-content {
+    display: flex;
+    justify-content: center;
+}
+
+.channel-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 8px;
+    padding: 3rem 4rem;
+    text-align: center;
+    max-width: 450px;
+    transition: border-color 0.3s, background 0.3s;
+}
+
+.channel-card:hover {
+    border-color: rgba(201, 168, 76, 0.35);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.channel-icon {
+    margin-bottom: 1.5rem;
+}
+
+.channel-card h3 {
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+.channel-card > p {
+    color: rgba(240, 230, 211, 0.6);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+}
+
+/* ── Buttons ─────────────────────────────────── */
+.btn {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: #c9a84c;
+    color: #0d0d0d;
+    border: 1px solid #c9a84c;
+}
+
+.btn-primary:hover {
+    background: #e0c068;
+    border-color: #e0c068;
+    color: #0d0d0d;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #c9a84c;
+    border: 1px solid rgba(201, 168, 76, 0.5);
+}
+
+.btn-outline:hover {
+    background: rgba(201, 168, 76, 0.1);
+    border-color: #c9a84c;
+    color: #e0c068;
+}
+
+.btn-link {
+    color: #c9a84c;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    transition: color 0.3s, letter-spacing 0.3s;
+}
+
+.btn-link:hover {
+    color: #e0c068;
+    letter-spacing: 0.06em;
+}
+
+/* ── Papers Section ──────────────────────────── */
+.papers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    text-align: left;
+}
+
+.paper-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(201, 168, 76, 0.12);
+    border-radius: 6px;
+    padding: 2rem;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.paper-card:hover {
+    border-color: rgba(201, 168, 76, 0.3);
+    transform: translateY(-3px);
+}
+
+.paper-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    background: rgba(201, 168, 76, 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+}
+
+.paper-card h3 {
+    font-size: 1.4rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.paper-meta {
+    font-size: 0.8rem;
+    color: rgba(240, 230, 211, 0.45);
+    margin-bottom: 1rem;
+    letter-spacing: 0.03em;
+}
+
+.paper-abstract {
+    font-size: 0.92rem;
+    color: rgba(240, 230, 211, 0.7);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+/* ── Blog Section ────────────────────────────── */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    text-align: left;
+}
+
+.blog-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-left: 3px solid #c9a84c;
+    border-radius: 4px;
+    padding: 2rem;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.blog-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-3px);
+}
+
+.blog-date {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(201, 168, 76, 0.6);
+    display: block;
+    margin-bottom: 0.8rem;
+}
+
+.blog-card h3 {
+    font-size: 1.25rem;
+    color: #ffffff;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+}
+
+.blog-excerpt {
+    font-size: 0.9rem;
+    color: rgba(240, 230, 211, 0.6);
+    margin-bottom: 1.2rem;
+    line-height: 1.6;
+}
+
+/* ── Footer ──────────────────────────────────── */
+.site-footer {
+    background: #0a0a0a;
+    border-top: 1px solid rgba(201, 168, 76, 0.1);
+    padding: 4rem 2rem 2rem;
+}
+
+.footer-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.footer-brand h3 {
+    font-size: 1.4rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+.footer-brand p {
+    font-size: 0.85rem;
+    color: rgba(240, 230, 211, 0.45);
+    font-style: italic;
+}
+
+.footer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    text-align: center;
+}
+
+.footer-nav a {
+    color: rgba(240, 230, 211, 0.5);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+}
+
+.footer-nav a:hover {
+    color: #c9a84c;
+}
+
+.footer-social {
+    text-align: right;
+}
+
+.footer-social a {
+    color: rgba(240, 230, 211, 0.4);
+    transition: color 0.3s;
+}
+
+.footer-social a:hover {
+    color: #c9a84c;
+}
+
+.footer-bottom {
+    max-width: 1100px;
+    margin: 3rem auto 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 0.75rem;
+    color: rgba(240, 230, 211, 0.25);
+    letter-spacing: 0.05em;
+}
+
+/* ── Fade-in Animation ───────────────────────── */
+.fade-in {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger children */
+.fade-in:nth-child(2) { transition-delay: 0.1s; }
+.fade-in:nth-child(3) { transition-delay: 0.2s; }
+.fade-in:nth-child(4) { transition-delay: 0.3s; }
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 900px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .papers-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-nav {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .footer-social {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Simplify philosopher images on mobile */
+    .philosopher-wrap {
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+
+    .philosopher-wrap.philosopher-center {
+        width: 100%;
+        left: 0;
+    }
+
+    .philosopher-right .philosopher-img,
+    .philosopher-left .philosopher-img,
+    .philosopher-center .philosopher-img {
+        -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 20%, transparent 80%);
+        mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 20%, transparent 80%);
+    }
+
+    /* Reduce animation intensity on mobile */
+    .philosopher-img {
+        animation-duration: 40s !important;
+    }
+
+    /* Mobile nav */
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: right 0.4s ease;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+
+    .nav-links.open {
+        right: 0;
+    }
+
+    .navbar {
+        padding: 1.2rem 1.5rem;
+    }
+
+    .navbar.scrolled {
+        padding: 0.8rem 1.5rem;
+    }
+
+    .section-content {
+        padding: 4rem 1.5rem;
+    }
+
+    .hero-content {
+        padding-top: 6rem;
+    }
+
+    .channel-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .philosopher-credit {
+        font-size: 0.75rem;
+        right: 1rem;
+        bottom: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        letter-spacing: 0.03em;
+    }
+
+    .section-title {
+        letter-spacing: 0.08em;
+    }
+}
